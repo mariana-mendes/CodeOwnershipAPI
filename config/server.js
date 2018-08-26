@@ -1,6 +1,5 @@
 const port = 3000;
 
-// interpreta o corpo da requisição
 const express = require('express')
 const server = express()
 
