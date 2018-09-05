@@ -3,8 +3,8 @@ const app = express();
 const router = express.Router();
 
 const index = require('./routes/index');
-const musicRoute = require('./routes/musicRoute');
-const userRoute = require('./routes/userRoute');
+const musicRoute = require('./music/musicRoute');
+const userRoute = require('./user/userRoute');
 
 app.use('/', index);
 app.use('/music', musicRoute);
