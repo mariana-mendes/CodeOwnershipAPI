@@ -7,6 +7,9 @@ exports.get = (req, res, next) => {
     const response = req.params.login ? userExample : 'get tds musicas'
     res.status(201).send(response);
 };
+exports.getLists = (req, res, next) => {
+    res.status(201).send(files.all());
+};
 
 exports.received = (req, res) => { 
     res.status(201).send(files.received())

@@ -4,7 +4,7 @@ const controller = require('../controllers/userController')
 
 router.get('/', controller.get);
 router.post('/', controller.post);
-router.get('/:login', controller.get);
+router.get('/:login', controller.getLists);
 router.get('/:login/received', controller.received);
 router.get('/:login/recommended', controller.recommended);
 router.get('/:login/favorite', controller.favorite);

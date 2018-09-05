@@ -50,6 +50,8 @@ const recommended_list = {recommended_list:
     }
     ]}
 
-this.received = () => received_list;
-this.favorite = () => favorite_list;
-this.recommended = () => recommended_list;
+const lists = {received: received_list, favorite: favorite_list, recommended: recommended_list}
+this.received = () => received_list
+this.favorite = () => favorite_list
+this.recommended = () => recommended_list
+this.all = () => lists
