@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/mariana-mendes/devVVeb-api#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "supertest": "^3.2.0"
   }
 }
