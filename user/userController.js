@@ -1,27 +1,24 @@
 const files = require('../static/staticFile')
+const User = require('./user')
+// const mongoose = require('mongoose');
+
+var fluffy = new User({ name: 'fluffy' });
+
 
 exports.get = (req, res, next) => {
-    const userExample = {
-        login: 'Mariana-1',
-    }
-    const response = req.params.login ? userExample : 'get tds musicas'
-    res.status(200).send(response);
-};
-exports.getLists = (req, res, next) => {
-    res.status(201).send(files.all());
+    User.find(function (err, kittens) {
+        if (err) return console.error(err);
+        console.log(kittens);
+    })
+    res.status(200).send('uu');
 };
 
-exports.received = (req, res) => { 
-    res.status(201).send(files.received())
+exports.post = (req, res, next) =>{
+    fluffy.save(function (err, fluffy) {
+        if (err) return console.error(err);
+        fluffy.speak();
+      });
+    res.status(201).send('userPost')
 }
-
-exports.recommended = (req, res) => { 
-    res.status(201).send(files.recommended())
-}
-
-exports.favorite = (req, res) => { 
-    res.status(201).send(files.favorite())
-}
-exports.post = (req, res, next) => res.status(201).send('userPost')
 exports.put = (req, res, next) =>  res.status(201).send('userPut')
 exports.delete = (req, res, next) => res.status(200).send('userDelete')
