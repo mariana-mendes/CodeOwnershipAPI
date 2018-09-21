@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-var projectSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
     name: String,
     authors: String,
     metric: {
