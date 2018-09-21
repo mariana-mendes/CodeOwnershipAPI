@@ -1,3 +1,2 @@
-# devVVeb-api
+# CodeOwnershipAPI
 
-#### [Run]: `cd devVVeb-api && bash run.sh`
