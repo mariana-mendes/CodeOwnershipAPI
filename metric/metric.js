@@ -26,8 +26,4 @@ var metricSchema = new mongoose.Schema({
       ]
 });
 
-metricSchema.methods.getName =  () => {
-  
-}
-
-module.exports = mongoose.model('Metrics', metricSchema);
+module.exports = mongoose.model('Metric', metricSchema);
