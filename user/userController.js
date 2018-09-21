@@ -1,4 +1,3 @@
-const files = require('../static/staticFile')
 const User = require('./user')
 
 exports.get = (req, res, next) => {
