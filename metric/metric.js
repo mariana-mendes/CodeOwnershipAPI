@@ -8,7 +8,7 @@ var metricSchema = new mongoose.Schema({
           name: String,
           class_name: String,
           expertise_value:String,
-          expertise: name,
+          expertise_name: String,
           type: {
             type: { type: String }
           },
