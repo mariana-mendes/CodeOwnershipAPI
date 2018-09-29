@@ -4,6 +4,6 @@ const controller = require('./metricController')
 
 router.get('/', controller.get);
 router.post('/', controller.post);
-router.put('/:project_id/metric', controller.put);
-router.delete('/:project_id/metric', controller.delete);
+router.put('user/:login/project/:project_id/metric/:metric_id', controller.put);
+router.delete('user/:login/project/:project_id/metric/:metric_id', controller.delete);
 module.exports = router;

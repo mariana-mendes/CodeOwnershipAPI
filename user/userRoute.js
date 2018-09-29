@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./userController')
 
-router.get('/', controller.get);
+router.get('/:login', controller.get);
+router.get('/', controller.getAll);
 router.post('/', controller.post);
 router.put('/:login', controller.put);
 router.delete('/:login', controller.delete);
