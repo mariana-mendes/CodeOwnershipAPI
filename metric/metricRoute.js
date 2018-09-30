@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./metricController')
 
-router.get('/', controller.get);
+const resource = '/project/:project_id/metric/:metric_id';
+
+router.get(`${resource}`, controller.get);
+router.get('/', controller.getAll);
 router.post('/', controller.post);
-router.put('user/:login/project/:project_id/metric/:metric_id', controller.put);
-router.delete('user/:login/project/:project_id/metric/:metric_id', controller.delete);
+router.put(`${resource}`, controller.put);
+router.delete(`${resource}`, controller.delete);
 module.exports = router;
