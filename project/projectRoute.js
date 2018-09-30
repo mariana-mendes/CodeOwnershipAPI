@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./projectController')
 
+const resource = '/:project_id/';
+
 router.get('/', controller.getAll);
-router.get('/:project_id', controller.get);
+router.get(`${resource}`, controller.get);
 router.post('/', controller.post);
-router.put('user/:login/project/:project_id', controller.put);
-router.delete('user/:login/project/:project_id', controller.delete);
+router.put(`${resource}`, controller.put);
+router.delete(`${resource}`, controller.delete);
 
 module.exports = router;
