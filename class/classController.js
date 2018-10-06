@@ -4,6 +4,10 @@ exports.get = (req, res, next) => {
     res.status(200).send('uu');
 };
 
+exports.getAll = (req, res, next) => {
+    res.status(200).send('uu');
+}; 
+
 exports.post = (req, res, next) =>{
     res.status(201).send('new')
 }
