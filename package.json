@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mariana-mendes/devVVeb-api#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "chai": "^4.1.2",
     "express": "^4.16.3",
     "mocha": "^5.2.0",
