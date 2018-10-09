@@ -27,7 +27,8 @@
     "mongod": "^2.0.0",
     "mongodb": "^3.1.6",
     "mongoose": "^5.3.0",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "swagger-express": "^1.0.5"
   },
   "devDependencies": {
     "supertest": "^3.2.0"

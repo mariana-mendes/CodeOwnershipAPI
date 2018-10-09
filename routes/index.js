@@ -20,21 +20,11 @@ router.post('/register', (req, res, next) => {
     });
 });
 
- router.get('/protected_page', verifyToken, function(req, res){
-    jwt.verify(req.token, 'secretKey', (err, authData) =>{
-        if(err){
-            res.sendStatus(403)
-        }else{
-            res.redirect('/project')
-        }
-    })
- });
  
  router.post('/login', function(req, res){
     //Verificar se usuário existe 
     User.findById(req.params.login, function (err, user) {
         if (err) return console.error(err);
-    
         jwt.sign({user}, 'secretKey', { expiresIn: '1000s'},  (err, token) =>{
             res.json({token})
             res.redirect('/user')

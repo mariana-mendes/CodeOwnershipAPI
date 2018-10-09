@@ -1,14 +1,12 @@
 const User = require('./user')
 
 exports.getAll = (req, res, next) => {
-    console.log('aaaaaaaaaS');
     User.find(function (err, kittens) {
         if (err) return console.error(err);
         console.log(kittens);
     })
     res.status(200).send('uu');
 };
-
 
 exports.get = (req, res, next) => {
     User.findById(req.params.login, function (err, user) {
