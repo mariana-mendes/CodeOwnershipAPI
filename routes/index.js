@@ -1,25 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const app = express();
 const User = require('../user/user')
-const passport = require('passport')
-var session = require('express-session');
+const jwt = require('jsonwebtoken')
 var cookieParser = require('cookie-parser');
 router.use(cookieParser());
-router.use(session({secret: "Your secret key"}));
 
-
-router.use(passport.initialize())
-    
-router.get('/', (req, res, next) => 
-        res.status(200).send({ app: "running"})
-    );
-
-
-router.get('/register', (req, res, next) => 
-///validar 
-    res.status(200).send({ app: "register view"})
-);
 
 router.post('/register', (req, res, next) => {
     const newUser = new User(req.body);
@@ -32,53 +17,43 @@ router.post('/register', (req, res, next) => {
     })
 });
 
-function checkSignIn(req, res){
-    if(req.session.user){
-       next();     //If session exists, proceed to page
-    } else {
-       var err = new Error("Not logged in!");
-       console.log(req.session.user);
-       next();  //Error, trying to access unauthorized page!
-    }
- }
- router.get('/protected_page', checkSignIn, function(req, res){
-     res.redirect('/project')
- });
- 
- router.get('/login', function(req, res){
-    res.send('login');
+ router.get('/protected_page', verifyToken, function(req, res){
+    jwt.verify(req.token, 'secretKey', (err, authData) =>{
+        if(err){
+            res.sendStatus(403)
+        }else{
+            res.redirect('/project')
+            // res.send(authData);
+        }
+    })
  });
  
  router.post('/login', function(req, res){
-     console.log(req.body);
-    if(!req.body.login || !req.body.password){
-       res.send('login invalid');
-    } else {
-        User.find(function (err, users) {
-            if (err) {
-                return console.error(err);
-            }else{
-                // users.filter(function(user){
-                //     if(user.login === req.body.login){
-                //       return  res.redirect('/protected_page');
-                //     }
-                // })
-            }
-        })
+    //Verificar se usuário existe 
+    const userMock = {
+        id:1,
+        login: 'maria',
+        password: 'wdasdasd'
     }
- });
- 
- router.get('/logout', function(req, res){
-    req.session.destroy(function(){
-       console.log("user logged out.")
+
+    jwt.sign({userMock}, 'secretKey', { expiresIn: '1000s'},  (err, token) =>{
+        res.json({
+            token
+        })
     });
-    res.redirect('/login');
  });
- 
- router.use('/protected_page', function(err, req, res, next){
- console.log(err);
-    //User should be authenticated! Redirect him to log in.
-    res.redirect('/login');
- });
- 
+
+ function verifyToken(req, res, next){
+     const bearerHeader = req.headers.authorization;
+
+     if(typeof bearerHeader !== 'undefined'){
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+     }else{
+         res.sendStatus(404);
+     }
+
+ }
 module.exports = router;
