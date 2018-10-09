@@ -1,6 +1,7 @@
 const User = require('./user')
 
 exports.getAll = (req, res, next) => {
+    console.log('aaaaaaaaaS');
     User.find(function (err, kittens) {
         if (err) return console.error(err);
         console.log(kittens);
@@ -12,8 +13,8 @@ exports.getAll = (req, res, next) => {
 exports.get = (req, res, next) => {
     User.findById(req.params.login, function (err, user) {
         if (err) return console.error(err);
+        res.status(200).send(user);
     })
-    res.status(200).send('achoous');
 };
 
 exports.post = (req, res, next) =>{
@@ -22,7 +23,7 @@ exports.post = (req, res, next) =>{
         if (err) return console.error(err);
         newUser.getName();
       });
-    res.status(201).send('new')
+    res.status(201).send(newUser);
 }
 exports.put = (req, res, next) =>  res.status(201).send('userPut')
 exports.delete = (req, res, next) => res.status(200).send('userDelete')

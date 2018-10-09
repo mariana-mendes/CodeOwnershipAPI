@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../user/user')
 const jwt = require('jsonwebtoken')
+const user_controller = require('../user/userController')
 var cookieParser = require('cookie-parser');
 router.use(cookieParser());
 
@@ -12,9 +13,11 @@ router.post('/register', (req, res, next) => {
       if (err) return console.error(err);
     });
 
-    req.login(newUser._id, function(){
-        res.redirect('/');
-    })
+    jwt.sign({newUser}, 'secretKey', { expiresIn: '1000s'},  (err, token) =>{
+        res.json({
+            token
+        })
+    });
 });
 
  router.get('/protected_page', verifyToken, function(req, res){
@@ -23,24 +26,20 @@ router.post('/register', (req, res, next) => {
             res.sendStatus(403)
         }else{
             res.redirect('/project')
-            // res.send(authData);
         }
     })
  });
  
  router.post('/login', function(req, res){
     //Verificar se usuário existe 
-    const userMock = {
-        id:1,
-        login: 'maria',
-        password: 'wdasdasd'
-    }
-
-    jwt.sign({userMock}, 'secretKey', { expiresIn: '1000s'},  (err, token) =>{
-        res.json({
-            token
-        })
-    });
+    User.findById(req.params.login, function (err, user) {
+        if (err) return console.error(err);
+    
+        jwt.sign({user}, 'secretKey', { expiresIn: '1000s'},  (err, token) =>{
+            res.json({token})
+            res.redirect('/user')
+        });
+    })
  });
 
  function verifyToken(req, res, next){
@@ -54,6 +53,5 @@ router.post('/register', (req, res, next) => {
      }else{
          res.sendStatus(404);
      }
-
  }
 module.exports = router;
