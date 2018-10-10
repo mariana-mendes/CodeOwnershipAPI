@@ -1,7 +1,10 @@
 var expect = require("chai").expect;
+const controller = require('../class/classController')
+const Class = require('../class/class')
 
-describe("printName()", function(){
-    it("balbabalbla", function(){
+
+describe("get()", function(){
+    it("should ...", function(){
 
         expect(true).to.be.true;
 
