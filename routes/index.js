@@ -20,6 +20,7 @@ router.post('/register', (req, res, next) => {
  router.get('/protected_page', verifyToken, function(req, res){
     jwt.verify(req.token, 'secretKey', (err, authData) =>{
         if(err){
+            console.log(authData);
             res.sendStatus(403)
         }else{
             res.redirect('/project')
@@ -40,20 +41,23 @@ router.post('/register', (req, res, next) => {
         res.json({
             token
         })
+       
     });
  });
 
  function verifyToken(req, res, next){
      const bearerHeader = req.headers.authorization;
-
+     console.log(bearerHeader);
      if(typeof bearerHeader !== 'undefined'){
         const bearer = bearerHeader.split(' ');
         const bearerToken = bearer[1];
         req.token = bearerToken;
+        console.log(req.token);
         next();
      }else{
          res.sendStatus(404);
      }
 
  }
+
 module.exports = router;

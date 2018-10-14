@@ -1,11 +1,11 @@
 const Class = require('./class')
 
 exports.getAll = (req, res, next) => {
-    Class.find(function (err, kittens) {
+    Class.find(function (err, classes) {
         if (err) return console.error(err);
-        console.log(kittens);
+        console.log(classes);
     })
-    res.status(200).send('uu');
+    res.status(200).send("Class created.");
 };
 
 
@@ -23,6 +23,12 @@ exports.post = (req, res, next) =>{
         newClass.getName();
       });
     res.status(201).send('new')
+}
+
+exports.getAuthors = (req, res, next) =>{
+
+
+
 }
 exports.put = (req, res, next) =>  res.status(201).send('classPut')
 exports.delete = (req, res, next) => res.status(200).send('classDelete')
