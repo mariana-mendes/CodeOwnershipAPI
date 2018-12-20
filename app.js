@@ -33,8 +33,8 @@ function verifyToken(req, res, next){
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors())
-app.use('/', verifyToken, index);
-app.use('/user',verifyToken , userRoute);
+app.use('/', index);
+app.use('/user' , userRoute);
 app.use('/metric', metricRoute);
 app.use('/class', classRoute);
 app.use('/author', authorRoute);
