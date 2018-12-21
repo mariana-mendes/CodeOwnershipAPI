@@ -10,13 +10,10 @@ exports.get = (req, res, next) => {
     res.status(200).send('achou');
 }
 
-
 exports.getAll = (req,res, next) => {
     Project.find(function (err, kittens) {
-        if (err) return console.error(err);
-        console.log(kittens);
+        res.status(200).send(kittens);
     })
-    res.status(200).send('uug');
 };
 
 exports.post = (req, res, next) =>{

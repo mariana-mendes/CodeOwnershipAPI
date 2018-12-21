@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const config = require('./config/server')
 const populate = require('./config/populate')
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/bd');
 
 const index = require('./routes/index'),
       userRoute = require('./user/userRoute'),
