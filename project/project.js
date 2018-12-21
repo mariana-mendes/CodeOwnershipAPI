@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const projectSchema = new mongoose.Schema({
     name: String,
     authors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Author' }],
-    metric: { type: mongoose.Schema.Types.ObjectId, ref: 'Metric' }
+    metric: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Metric' }],
+    classes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }]
   });
 
 projectSchema.methods.getName =  () => {
